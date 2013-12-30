@@ -1,5 +1,5 @@
 '''
-Most comments are inline, but at a high level this takes a number of inputs (first name, last name, nickname, middle initial, work email) and puts together a lot of possible email addresses for them. Then it checks each of them using the rapportive API to see if they exist, and tells you which ones do.
+Most comments are in-line, but at a high level this takes a number of inputs (first name, last name, nickname, middle initial, work email) and puts together a lot of possible email addresses for them. Then it checks each of them using the rapportive API to see if they exist, and tells you which ones do.
 
 Please don't use it for evil.
 '''
