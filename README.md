@@ -1,12 +1,14 @@
 This program uses the Rapportive API to find someone's email address based on information that you supply.
 
-It's purpose is for networking and personal outreach, it is NOT for spamming or selling influencers. Please use it responsibly or it will be removed.
+It's purpose is for networking and personal outreach, it is NOT for spamming or selling to influencers. Please use it responsibly or it will be removed.
 
 ##Dependencies:
 
 Before you can run this program you'll need the Rapportive Python plugin from here:https://github.com/jordan-wright/rapportive
+
 (Credit to Jordan Wright for creating such a simple and intuitive python rapportive API)
-Just download his file and install it before downloading this one.
+
+Just download his repo and install it before running this one.
 
 ##Installation:
 
@@ -21,6 +23,6 @@ At this time, I have not added functionality to figure out their work email addr
 
 Please be professional and courteous, don't spam people just because you can find their email address now.
 
-+##Updates:
+##Updates:
 
 If you think of any ways to improve the email possibilities function, or any other part of it really, please just submit a push request and I'll likely accept it.
