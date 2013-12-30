@@ -2,6 +2,8 @@ This program uses the Rapportive API to find someone's email address based on in
 
 It's purpose is for networking and personal outreach, it is NOT for spamming or selling to influencers. Please use it responsibly or it will be removed.
 
+It seems to have the most problems with non-gmail addresses... still trying to figure out why. Let me know if you have any ideas
+
 ##Dependencies:
 
 Before you can run this program you'll need the Rapportive Python plugin from here:https://github.com/jordan-wright/rapportive
