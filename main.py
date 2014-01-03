@@ -1,9 +1,11 @@
 '''
-Most comments are in-line, but at a high level this takes a number of inputs
-(first name, last name, nickname, middle initial, work email) and puts
-together a lot of possible email addresses for them. Then it checks each of
-them using the rapportive API to see if they exist, and tells you which ones
-do.
+Author: Nathaniel Eliason
+Goal: Allow a user to enter personal information about someone,
+and receive a list of their possible email addresses by checking 
+all likely possibilities against the Rapportive API
+
+Please send any questions to nateliason@gmail.com, or on GitHub 
+at www.github.com/nateliason/
 
 Please don't use it for evil.
 '''
@@ -11,12 +13,12 @@ Please don't use it for evil.
 from rapportive import rapportive
 
 
-# this just takes an email and gets their user report from Rapportive
+#Take an email address and get their user report from Rapportive
 def getProfile(user):
   return rapportive.request(user)
 
 
-# this checks if they have any results in Rapportive without breaking the query limit
+#Check if they have any results in Rapportive (no results usually means invalid email)
 def successCheck(user):
   while True:
     try:
@@ -30,7 +32,8 @@ def possibleEmails(possible_name_combos, at_domain):
   return [item + '@' + at_domain for item in possible_name_combos]
 
 
-# All of the basic possible email combinations from the data given. If you think of more then send a push request
+# All of the basic possible email combinations from the data given. If you think of more then send a pull request.
+#The length of this list has to be balanced against the Rapportive Rate Limiting, at least until we find a workaround
 def compileAllPossibleEmails(first_name, last_name, middle_initial, nick_name, at_domain, try_gmail):
   possible_name_combos = []
   possible_emails      = []
@@ -81,18 +84,21 @@ def compileAllPossibleEmails(first_name, last_name, middle_initial, nick_name, a
   return possible_emails + possible_gmails
 
 
-# creates a set of the real emails based on success-checking each of the possible ones
+#Create set of the real emails based on success-checking each of the possible ones
 def findEmail(emails):
-  realEmails = []
-  for i in emails:
-    if successCheck(i) == "No profile":
-      pass
-    else:
-      realEmails.append(i)
-  return realEmails
+	realEmails = []
+	for i in emails:
+		if successCheck(i) == "No profile":
+			pass
+		elif successCheck(i) == "error":
+			return "You hit the query limit =("
+			break
+		else:
+			realEmails.append(i)
+	return realEmails
 
 
-# prints out the real emails
+#Print out the real emails
 def results(email):
   if email != [] and len(email) == 1:
     print "Here's their email address! " + str(email)
@@ -103,7 +109,7 @@ def results(email):
     print email
 
 
-# runs the program with the appropriate user inputs
+#Run the program with the appropriate user inputs
 def main():
   print "If you don't have any of this information, just leave it blank and it will be skipped. I'd recommend trying to get their work email if possible though"
   results(findEmail(compileAllPossibleEmails(raw_input("First name: "), raw_input("Last name: "), raw_input("Middle initial: "), raw_input("Nickname: "), raw_input("Email Domain in format of 'xyz.com': "), raw_input("Should we try gmail? (y/n): "))))
